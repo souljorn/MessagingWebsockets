@@ -19,17 +19,17 @@ public class ApiApplication {
     private String exchangeName;
 
     @Bean
-    public Queue queue(){
+    public Queue queue() {
         return new Queue(queueName, false);
     }
 
     @Bean
-    public TopicExchange topicExchange(){
+    public TopicExchange topicExchange() {
         return new TopicExchange(exchangeName);
     }
 
     @Bean
-    public Binding binding(Queue queue, TopicExchange topicExchange){
+    public Binding binding(Queue queue, TopicExchange topicExchange) {
         return BindingBuilder.bind(queue).to(topicExchange).with(queueName);
     }
 

@@ -30,7 +30,7 @@ public class ApiController {
 
     @Autowired
     public ApiController(QuoteService quoteService, RabbitTemplate rabbitTemplate,
-                         ConfigurableApplicationContext context, ObjectMapper objectMapper){
+                         ConfigurableApplicationContext context, ObjectMapper objectMapper) {
         super();
         this.quoteService = quoteService;
         this.rabbitTemplate = rabbitTemplate;
@@ -40,14 +40,13 @@ public class ApiController {
     }
 
     @GetMapping("/quotes")
-    public List<Quote> getAllQuotes(){
+    public List<Quote> getAllQuotes() {
         List<Quote> quotes = this.quoteService.getAllQuotes();
-        quotes.forEach( quote ->{
+        quotes.forEach(quote -> {
             try {
                 String jsonString = objectMapper.writeValueAsString(quote);
                 rabbitTemplate.convertAndSend(queueName, jsonString);
-            }
-            catch (JsonProcessingException e){
+            } catch (JsonProcessingException e) {
                 LOGGER.error("parsing exception", e);
             }
         });
