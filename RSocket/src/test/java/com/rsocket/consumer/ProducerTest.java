@@ -12,7 +12,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.util.Supplier;
-import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.Disposable;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -80,7 +79,7 @@ public interface ProducerTest {
 
 
 }
-@SpringBootTest
+
 final class TransportPair<T, S extends Closeable> implements Disposable {
     private static final String data = "hello world";
     private static final String metadata = "metadata";
